@@ -23,47 +23,34 @@
     <div class='item-container'>
       <div class='item-container-content'>
         <div class='item'>
-          Use this to configure settings.
+          Use this configuration page to choose the settings you would like applied to this app.
         </div>
       </div>
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-header'></div>
       <div class='item-container-content'>
         <label class='item'>
-          Background Color
+          Text Color
           <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose app's background color. Used if High Contrast Mode is not selected. Note: Only available on Basalt watches that support many colors.
+        Choose app's text color.
       </div>
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'></div>
+      <div class='item-container-header'>Accessibility</div>
       <div class='item-container-content'>
         <label class='item'>
-          Gray Text/Date Background
-          <input id='gray_background_checkbox' type='checkbox' class='item-toggle'>
-        </label>
-      </div>
-      <div class='item-container-footer'>
-        Turns gray background fof time/date on or off.
-      </div>
-    </div>
-
-    <div class='item-container'>
-      <div class='item-container-header'></div>
-      <div class='item-container-content'>
-        <label class='item'>
-          High Contrast Mode
+          Gray text/date Background
           <input id='high_contrast_checkbox' type='checkbox' class='item-toggle'>
         </label>
       </div>
       <div class='item-container-footer'>
-        Switches app colors so screen can be seen in low light.
+        Turns text/date background on/off.
       </div>
     </div>
 
@@ -77,18 +64,15 @@
   function getConfigData() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
-    var grayBackgroundCheckbox = document.getElementById('gray_background_checkbox');
  
     var options = {
       'background_color': backgroundColorPicker.value,
-      'high_contrast': highContrastCheckbox.checked,
-      'gray_background': grayBackgroundCheckbox.checked
+      'high_contrast': highContrastCheckbox.checked
     };
 
     // Save for next launch
     localStorage['background_color'] = options['background_color'];
     localStorage['high_contrast'] = options['high_contrast'];
-    localStorage['gray_background'] = options['gray_background'];
 
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -118,11 +102,9 @@
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
-    var grayBackgroundCheckbox = document.getElementById('gray_background_checkbox');
 
     // Load any previously saved configuration, if available
     if(localStorage['high_contrast']) {
-      grayBackgroundCheckbox.checked = JSON.parse(localStorage['gray_background']);
       highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
       backgroundColorPicker.value = localStorage['background_color'];
     }
